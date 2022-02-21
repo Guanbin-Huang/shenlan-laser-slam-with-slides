@@ -9,13 +9,17 @@ using namespace std;
 int main(int argc, char** argv)
 {
     // 机器人B在坐标系O中的坐标：
-    Eigen::Vector3d B(3, 4, M_PI);
+    Eigen::Vector3d B(3, 4, M_PI); // 默认为列向量 
+    std::cout << B << std::endl;
 
     // 坐标系B到坐标O的转换矩阵：
     Eigen::Matrix3d TOB;
-    TOB << cos(B(2)), -sin(B(2)), B(0),
-        sin(B(2)), cos(B(2)), B(1),
-        0, 0, 1;
+    TOB << cos(B(2)), -sin(B(2)), B(0), 
+           sin(B(2)), cos(B(2)), B(1),
+           0, 0, 1; 
+    
+    std::cout << TOB << std::endl;
+
 
     // 坐标系O到坐标B的转换矩阵:
     Eigen::Matrix3d TBO = TOB.inverse();
@@ -36,6 +40,7 @@ int main(int argc, char** argv)
     BA[1] = TAB(1, 2);
     BA[2] = atan2(TAB(1, 0), TAB(0, 0));
     // end your code here
+
 
     cout
         << "The right answer is BA: 2 1 1.5708" << endl;
